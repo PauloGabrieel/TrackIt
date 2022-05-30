@@ -1,26 +1,45 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import styled from "styled-components"
-import unchecked from "../../assets/image/unchecked.svg"
+import check from "../../assets/image/unchecked.svg"
+import MyContext from "../../MyContext/MyContext";
 export default function CardToday(){
     const [todyHabits, setTodayHabits] = useState([])
     const token = localStorage.getItem("token");
-    console.log(token)
+    const [attApi, setAttApi] = useState(false);
+
+    const{user, setUser} = useContext(MyContext);
+    
+    
+
     
 
     useEffect(()=>{
-        console.log( 'entrou no effect')
+        
         const config ={
             headers:{"Authorization":`Bearer ${token}`}
     
         };
         const promise = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today',config);
         promise.then(response => {
-            console.log(response)
-            setTodayHabits(response.data)
+           
+            const habit = response.data
+            setTodayHabits(habit)
+            const totalHabits = response.data.length;
+            let checkedHabits = 0;
+            response.data.filter(item => {
+                
+                if(item.done === true){
+                    checkedHabits++;
+                }
+
+            });
+            
+            setUser({...user,totalHabits,checkedHabits})
+            
         });
         promise.catch(error => console.log(error.response))
-    },[])
+    },[attApi])
     
     function makeCard(){
         if(todyHabits.length !==0){
@@ -33,17 +52,42 @@ export default function CardToday(){
                         <span> Seu recorde: {habit.highestSequence} dias</span>
                     </DescriptionContainer>
                     <CheckContainer done={habit.done}>
-                        <img src={unchecked}/>
-                    </CheckContainer>               
+                        <img onClick={()=>checked(habit.id, habit.done)} src={check}/>
+                    </CheckContainer>                
                 </CardContainer>));
         }else{
             <h1>Carregando!!!</h1>
         };
     };
     
-   
     const renderCard = makeCard();
     
+    function checked(id, done){
+        const config ={
+            headers:{"Authorization":`Bearer ${token}`}
+        };
+        if(!done){
+            const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`, null, config);
+            promise.then(response => {
+            console.log(response.data);
+            setAttApi(!attApi);
+        });
+        promise.catch(error => console.log(error.response));
+        }else{
+            const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`, null, config);
+            promise.then(response => {
+                console.log(response.data);
+                setAttApi(!attApi);
+            });
+            promise.catch(error => error.response);
+        
+        }
+
+        
+    }
+        
+
+ 
     return(
        <>
         {renderCard}

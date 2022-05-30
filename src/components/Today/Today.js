@@ -11,17 +11,18 @@ import Footer from "../shared/Footer";
 import CardToday from "./CardToday";
 export default function Today(){
     const {user} = useContext(MyContext);
+    dayjs.locale('pt-br');
     const now = dayjs();
-
-    // const promise =
-
+    
+    console.log(user)
     return(
         <Container>
             <Header></Header>
             <TodayContainer>
                 <div className="StatusTrackIt">
-                    <h2>{`${now.format('dddd')} - ${now.format('DD/MM')}`}</h2>
-                    <p>Nenhum hábito  concluído ainda</p>
+                    <h2>{`${now.format('dddd').replace("-feira", "")} - ${now.format('DD/MM')}`}</h2>
+                    {user.totalHabits === undefined ? <p>Nenhum hábito  concluído ainda</p>: 
+                    <p style={{color:"#8FC549"}}> {`${(100*user.checkedHabits)/user.totalHabits}% dos hábitos concluídos`}</p>}
                 </div>
                 <CardToday></CardToday>
             </TodayContainer>
