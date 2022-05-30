@@ -21,7 +21,7 @@ export default function Today(){
             <TodayContainer>
                 <div className="StatusTrackIt">
                     <h2>{`${now.format('dddd').replace("-feira", "")} - ${now.format('DD/MM')}`}</h2>
-                    {user.totalHabits === undefined ? <p>Nenhum hábito  concluído ainda</p>: 
+                    {user.totalHabits === 0 ? <p>Nenhum hábito  concluído ainda</p>: 
                     <p style={{color:"#8FC549"}}> {`${(100*user.checkedHabits)/user.totalHabits}% dos hábitos concluídos`}</p>}
                 </div>
                 <CardToday></CardToday>
@@ -37,6 +37,7 @@ const Container = styled.div`
     background-color: #E5E5E5;
     margin: 70px auto;
     width:100%;
+    height :100vh;
     
 `;
 

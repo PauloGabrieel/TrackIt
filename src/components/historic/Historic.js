@@ -26,8 +26,9 @@ const Container = styled.div`
     flex-direction: column;
     background-color: #E5E5E5;
     margin: 70px auto;
-    width:416px;
-    height:100vh;
+    width:100%;
+    height: 100vh;
+   
 `;
 const HistoricContainer = styled.div`
     display : flex;

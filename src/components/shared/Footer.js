@@ -7,7 +7,7 @@ import MyContext from "../../MyContext/MyContext";
 export default function Footer(){
     const {user} = useContext(MyContext);
     console.log(user);
-    const percentage = (100 * user.checkedHabits)/user.totalHabits;
+    const percentage = user.totalHabits !== 0 ? 0 : (100 * user.checkedHabits)/user.totalHabits;
   
     return(
         <FooterContainer>
@@ -51,15 +51,20 @@ const FooterContainer = styled.div`
     padding: 0 30px;
    
     div:nth-child(2){
-        position: ;
-        top: 0;
+        position: absolute ;
+        top: -50px;
         cursor: pointer;
     };
     div{
         font:400 18px 'Lexend Deca', sans-serif;
         color: #52B6FF;
-    }
+    };
     a{ 
     text-decoration : none;
+    };
+    a:nth-child(2){
+        position: absolute;
+        right: 50%;
+        bottom: 15px;
     }
 `;
