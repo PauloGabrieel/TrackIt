@@ -29,8 +29,8 @@ export default function CardToday(){
                 <CardContainer key={habit.id}>
                     <DescriptionContainer>
                         <h3>{habit.name}</h3>
-                        <span>Sequência atual: {habit.currentSequence} dias</span>
-                        <span>Seu recorde: {habit.highestSequence} dias</span>
+                        <span> Sequência atual: {habit.currentSequence} dias</span>
+                        <span> Seu recorde: {habit.highestSequence} dias</span>
                     </DescriptionContainer>
                     <CheckContainer done={habit.done}>
                         <img src={unchecked}/>
@@ -41,6 +41,7 @@ export default function CardToday(){
         };
     };
     
+   
     const renderCard = makeCard();
     
     return(

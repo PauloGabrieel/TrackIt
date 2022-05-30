@@ -4,13 +4,13 @@ import {useState} from "react"
 import styled from "styled-components";
 export default function FormHabits({setShowForm, setControlApi, controlApi}){
     const [days, setDays] = useState([
-        {name: "D", clicked: false, id: 1},
-        {name: "S", clicked: false, id: 2},
-        {name: "T", clicked: false, id: 3},
+        {name: "D", clicked: false, id: 0},
+        {name: "S", clicked: false, id: 1},
+        {name: "T", clicked: false, id: 2},
+        {name: "Q", clicked: false, id: 3},
         {name: "Q", clicked: false, id: 4},
-        {name: "Q", clicked: false, id: 5},
-        {name: "S", clicked: false, id: 6},
-        {name: "S", clicked: false, id: 7}
+        {name: "S", clicked: false, id: 5},
+        {name: "S", clicked: false, id: 6}
     ]);
     const [descriptionHabits, setDescriptionHabits] = useState("");
     const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";

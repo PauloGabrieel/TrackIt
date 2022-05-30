@@ -1,6 +1,5 @@
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br"
-import axios from "axios";
 import { useContext } from "react";
 import styled from "styled-components";
 import Header from "../shared/Header";
@@ -36,8 +35,8 @@ const Container = styled.div`
     flex-direction: column;
     background-color: #E5E5E5;
     margin: 70px auto;
-    width:416px;
-    height:100vh;
+    width:100%;
+    
 `;
 
 const TodayContainer = styled.div`

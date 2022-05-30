@@ -9,13 +9,13 @@ export default function CardHabits({setControlApi, controlApi}){
     const {habits} = useContext(MyContext);
     const token = localStorage.getItem("token");
     const [weekday, setWeekday] = useState([
-        {name: "D",  id: 1, clicked: false},
-        {name: "S",  id: 2, clicked: false},
-        {name: "T",  id: 3, clicked: false},
+        {name: "D",  id: 0, clicked: false},
+        {name: "S",  id: 1, clicked: false},
+        {name: "T",  id: 2, clicked: false},
+        {name: "Q",  id: 3, clicked: false},
         {name: "Q",  id: 4, clicked: false},
-        {name: "Q",  id: 5, clicked: false},
-        {name: "S",  id: 6, clicked: false},
-        {name: "S",  id: 7, clicked: false}
+        {name: "S",  id: 5, clicked: false},
+        {name: "S",  id: 6, clicked: false}
     ]);
     
     function removeHabit(id, nameHabit){
