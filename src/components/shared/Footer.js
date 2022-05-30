@@ -2,12 +2,13 @@ import styled from "styled-components";
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import { Link } from "react-router-dom";
 import 'react-circular-progressbar/dist/styles.css';
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import MyContext from "../../MyContext/MyContext";
 export default function Footer(){
     const {user} = useContext(MyContext);
+    // const [percentage,setpercentage] = useState(0)
     console.log(user);
-    const percentage = user.totalHabits !== 0 ? 0 : (100 * user.checkedHabits)/user.totalHabits;
+    const percentage = user.totalHabits === 0 ? 0 : (100 * user.checkedHabits)/user.totalHabits;
   
     return(
         <FooterContainer>
@@ -50,11 +51,6 @@ const FooterContainer = styled.div`
     background-color: #fff;
     padding: 0 30px;
    
-    div:nth-child(2){
-        position: absolute ;
-        top: -50px;
-        cursor: pointer;
-    };
     div{
         font:400 18px 'Lexend Deca', sans-serif;
         color: #52B6FF;
@@ -62,9 +58,6 @@ const FooterContainer = styled.div`
     a{ 
     text-decoration : none;
     };
-    a:nth-child(2){
-        position: absolute;
-        right: 50%;
-        bottom: 15px;
-    }
+    
+        
 `;

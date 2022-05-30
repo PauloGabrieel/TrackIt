@@ -33,7 +33,7 @@ export default function Habits(){
     const renderForm = makeForm();
     function requetsHabits(){
         if(habits.length === 0){
-            return  <p>Em breve você poderá ver o histórico dos seus hábitos aqui!</p>;
+            return  <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>;
         }else{
            return <CardHabits controlApi={controlApi} setControlApi={setControlApi}  ></CardHabits>
             
