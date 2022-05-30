@@ -29,6 +29,7 @@ export default function FormLogin(){
                 const promise = axios.post(URL, body);
                 promise.then(response => {
                     localStorage.setItem("token", response.data.token);
+                    console.log(response.data.token)
                     const {name, id, image} = response.data;
                     setUser({name,id,image})
 

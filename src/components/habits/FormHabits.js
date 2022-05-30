@@ -28,7 +28,7 @@ export default function FormHabits({setShowForm, setControlApi, controlApi}){
         
         const promise = axios.post(URL,body,config);
         promise.then(response => {
-            console.log(response.data);
+            console.log(response);
             setShowForm(false);
             setControlApi(!controlApi);
         });

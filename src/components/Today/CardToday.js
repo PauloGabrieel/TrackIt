@@ -1,30 +1,53 @@
 import axios from "axios";
-
+import { useState, useEffect } from "react";
 import styled from "styled-components"
 import unchecked from "../../assets/image/unchecked.svg"
-export default function(){
+export default function CardToday(){
+    const [todyHabits, setTodayHabits] = useState([])
     const token = localStorage.getItem("token");
-    console.log("carregou")
-    const config ={
-        headers:{"Authorization":`Bearer ${token}`}
+    console.log(token)
+    
 
+    useEffect(()=>{
+        console.log( 'entrou no effect')
+        const config ={
+            headers:{"Authorization":`Bearer ${token}`}
+    
+        };
+        const promise = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today',config);
+        promise.then(response => {
+            console.log(response)
+            setTodayHabits(response.data)
+        });
+        promise.catch(error => console.log(error.response))
+    },[])
+    
+    function makeCard(){
+        if(todyHabits.length !==0){
+            
+            return (todyHabits.map(habit => 
+                <CardContainer key={habit.id}>
+                    <DescriptionContainer>
+                        <h3>{habit.name}</h3>
+                        <span>Sequência atual: {habit.currentSequence} dias</span>
+                        <span>Seu recorde: {habit.highestSequence} dias</span>
+                    </DescriptionContainer>
+                    <CheckContainer done={habit.done}>
+                        <img src={unchecked}/>
+                    </CheckContainer>               
+                </CardContainer>));
+        }else{
+            <h1>Carregando!!!</h1>
+        };
     };
     
-    const promise = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today',config);
-    promise.then(response => console.log(response));
-    promise.catch(error => console.log(error.response))
+    const renderCard = makeCard();
     
     return(
-        <CardContainer>
-            <DescriptionContainer>
-                <h3>Ler 1 capítulo de livro</h3>
-                <span>Sequência atual: 3 dias</span>
-                <span>eu recorde: 5 dias</span>
-            </DescriptionContainer>
-            <CheckContainer>
-                <img src={unchecked}/>
-            </CheckContainer>
-        </CardContainer>
+       <>
+        {renderCard}
+       </>
+      
     );
 };
 
@@ -61,7 +84,7 @@ const CardContainer = styled.div`
     align-items: center;
     width: 70px;
     height: 70px/;
-    background-color:#EBEBEB;
+    background-color:${props => props.done ?"#8FC549": "#EBEBEB" };
     border-radius: 5px;
     img{
         width: 35px;
